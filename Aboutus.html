@@ -1,0 +1,973 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>About Us</title>
+<style>
+  :root {
+    --primary: #2563eb;
+    --primary-light: #60a5fa;
+    --primary-dark: #1e40af;
+    --accent: #e0eaff;
+    --text-main: #1a1a1a;
+    --text-light: #fff;
+    --bg-main: #fff;
+    --bg-section: #f5faff;
+    --border: #bcd2fa;
+  }
+
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+
+  body {
+    font-family: 'Inter', sans-serif;
+    background-color: var(--bg-main);
+    color: var(--text-main);
+  }
+
+  .hero {
+    text-align: center;
+    padding: 4rem 2rem;
+    background-color: var(--bg-section);
+  }
+
+  .hero h1 {
+    font-size: 2.5rem;
+    color: var(--primary-dark);
+    margin-bottom: 1rem;
+  }
+
+  .hero p {
+    color: #666;
+    font-size: 1rem;
+    max-width: 600px;
+    margin: 0 auto 2rem;
+  }
+
+  .hero button {
+    background-color: var(--primary);
+    color: var(--text-light);
+    border: none;
+    padding: 0.75rem 1.5rem;
+    font-weight: 600;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: background 0.2s;
+  }
+
+  .hero button:hover {
+    background-color: var(--primary-light);
+  }
+
+  .origin {
+    background: var(--accent);
+    padding: 3rem 2rem;
+    text-align: center;
+  }
+
+  .origin h2 {
+    color: var(--primary);
+    font-size: 2.8rem;
+    font-weight: 800;
+    margin-bottom: 1.5rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+
+  .origin p {
+    color: var(--primary-dark);
+    max-width: 700px;
+    margin: 0 auto;
+    font-size: 1.2rem;
+    line-height: 1.8;
+    font-weight: 400;
+  }
+
+  /*team image*/
+  .full-screen {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--bg-section);
+    overflow: hidden;
+  }
+
+  .RG-team-photo {
+    position: relative;
+    width: 100%;
+    height: 100%;
+  }
+
+  .photo-container {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+  }
+
+  .photo-track {
+    display: flex;
+    transition: transform 0.5s ease-in-out;
+    height: 100%;
+  }
+
+  .photos-container {
+    flex: 0 0 100%;
+    position: relative;
+    text-align: center;
+    height: 100%;
+  }
+
+  .photo {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    animation: zoomInOut 10s infinite;
+  }
+  .photos-container.active .photo {
+    animation: zoomInOutCurrent 10s infinite;
+  }
+
+  .photos-container .photo {
+    animation: none;
+  }
+
+  @keyframes zoomInOutCurrent {
+    0% { transform: scale(1);}
+    50% { transform: scale(1.05);}
+    100% { transform: scale(1);}
+  }
+  .hover-text {
+    position: absolute;
+    bottom: 10%;
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
+    color: var(--primary-dark);
+    background-color: rgba(255,255,255,0.8);
+    padding: 1rem;
+    border-radius: 10px;
+    opacity: 1;
+    transition: opacity 0.4s ease-in-out;
+  }
+
+  .photos-container:hover .hover-text {
+    opacity: 1;
+  }
+
+  .photo-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: var(--primary);
+    color: var(--text-light);
+    border: none;
+    font-size: 2rem;
+    cursor: pointer;
+    z-index: 10;
+    padding: 0.5rem;
+    border-radius: 50%;
+    transition: background 0.2s;
+  }
+
+  .photo-btn:hover {
+    background-color: var(--primary-light);
+  }
+
+  .photo-btn.prev {
+    left: 10px;
+  }
+
+  .photo-btn.next {
+    right: 10px;
+  }
+  .hover-btn {
+    margin-top: 1rem;
+    background-color: var(--primary);
+    color: var(--text-light);
+    border: none;
+    padding: 0.5rem 1rem;
+    font-size: 1rem;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.3s;
+  }
+
+  .hover-btn:hover {
+    background-color: var(--primary-dark);
+    transform: scale(1.1);
+  }
+
+  /* Principles Section */
+  .principles-section {
+    text-align: center;
+    padding: 3rem 2rem;
+    background-color: var(--bg-section);
+  }
+
+  .principles-title {
+    font-size: 2.5rem;
+    font-weight: 800;
+    color: var(--primary);
+    margin-bottom: 1rem;
+  }
+
+  .principles-description {
+    font-size: 1.2rem;
+    color: #666;
+    margin-bottom: 2rem;
+  }
+
+  .principles-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 2rem;
+  }
+
+  .principle-item {
+    text-align: center;
+    max-width: 300px;
+  }
+
+  .principle-icon {
+    width: 80px;
+    height: 80px;
+    margin-bottom: 1rem;
+    border-radius: 18px;
+    border: 2px solid var(--primary-light);
+    background: var(--accent);
+  }
+
+  .principle-title {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--primary-dark);
+    margin-bottom: 0.5rem;
+  }
+
+  .principle-text {
+    font-size: 1rem;
+    color: #666;
+    line-height: 1.6;
+  }
+
+  .transforming-lives {
+    background: var(--bg-section);
+    padding: 3rem 2rem;
+    text-align: center;
+  }
+
+  .transforming-lives h2 {
+    color: var(--primary-dark);
+    font-size: 2rem;
+    margin-bottom: 1rem;
+  }
+
+  .transforming-lives p {
+    color: #444;
+    max-width: 700px;
+    margin: 0 auto;
+    font-size: 1.1rem;
+  }
+
+  /*Testimonials Section */
+  .testimonials-carousel {
+    width: 100%;
+    padding: 40px 0;
+    background: var(--bg-main);
+    text-align: center;
+    position: relative;
+  }
+
+  .carousel-container {
+    position: relative;
+    max-width: 960px;
+    margin: 0 auto;
+    overflow: hidden;
+  }
+
+  .carousel-track {
+    display: flex;
+    transition: transform 0.5s ease-in-out;
+  }
+
+  .testimonial-card {
+    flex: 0 0 100%;
+    padding: 20px;
+    box-sizing: border-box;
+  }
+
+  .testimonial-img {
+    width: 100px;
+    height: 100px;
+    border-radius: 100%;
+    object-fit: cover;
+    margin: 0 auto 20px;
+    border: 3px solid var(--primary-light);
+  }
+
+  .testimonial-meta {
+    font-weight: bold;
+    margin-bottom: 10px;
+    font-size: 18px;
+    color: var(--primary-dark);
+  }
+
+  .testimonial-quote {
+    font-style: italic;
+    font-size: 16px;
+    color: #555;
+  }
+
+  .carousel-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: var(--primary);
+    border: none;
+    font-size: 32px;
+    cursor: pointer;
+    color: var(--text-light);
+    z-index: 10;
+    border-radius: 50%;
+    padding: 0.2em 0.6em;
+    transition: background 0.2s;
+  }
+
+  .carousel-btn:hover {
+    background: var(--primary-light);
+  }
+
+  .carousel-btn.prev {
+    left: 10px;
+  }
+
+  .carousel-btn.next {
+    right: 10px;
+  }
+
+  .carousel-dots {
+    margin-top: 20px;
+  }
+
+  .dot {
+    display: inline-block;
+    height: 12px;
+    width: 12px;
+    margin: 0 6px;
+    background-color: var(--primary-light);
+    border-radius: 50%;
+    cursor: pointer;
+    transition: background 0.2s;
+  }
+
+  .dot.active {
+    background-color: var(--primary-dark);
+  }
+
+  .cta-section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 40px 0;
+    background: var(--bg-main);
+  }
+
+  .cta-btn {
+    background: var(--primary);
+    color: var(--text-light);
+    font-weight: bold;
+    border: none;
+    border-radius: 24px;
+    padding: 0.75rem 2rem;
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: background 0.2s;
+  }
+
+  .cta-btn:hover {
+    background: var(--primary-light);
+  }
+
+  footer {
+    background-color: var(--bg-main);
+    color: var(--primary-dark);
+  }
+
+  .headline-section {
+    background: var(--bg-main);
+    padding: 3rem 1rem;
+    text-align: center;
+    border-radius: 18px;
+    max-width: 900px;
+    margin: 2rem auto;
+    border: 1px solid var(--border);
+  }
+
+  .headline-section h2 {
+    font-size: 2.2rem;
+    font-weight: 800;
+    color: var(--primary);
+    margin-bottom: 1rem;
+  }
+
+  .headline-section p {
+    font-size: 1.05rem;
+    color: #333;
+    max-width: 700px;
+    margin: 0 auto 2rem;
+    line-height: 1.6;
+  }
+
+  .signature-block {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    align-items: center;
+    margin-top: 1rem;
+  }
+
+  .signature-item {
+    text-align: center;
+  }
+  .portrait {
+    width: 250px;
+    height: 250px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid var(--primary-light);
+    margin-bottom: 0.5rem;
+    transition: transform 0.3s, box-shadow 0.3s;
+  }
+
+  .portrait:hover {
+    transform: scale(1.1);
+    box-shadow: 0 8px 20px rgba(37, 99, 235, 0.15);
+  }
+  .signature-name {
+    font-weight: bold;
+    font-size: 1.1rem;
+    color: var(--primary);
+  }
+
+  .signature-img {
+    width: 80px;
+    margin-top: 0.3rem;
+  }
+  .developer-section {
+    padding: 3rem 1rem;
+    text-align: center;
+    background-color: var(--accent);
+    border-radius: 18px;
+    max-width: 1000px;
+    margin: 2rem auto;
+  }
+
+  .developer-section h2 {
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--primary-dark);
+    margin-bottom: 2rem;
+  }
+
+  .developer-gallery {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1.5rem;
+  }
+
+  .developer-gallery img {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid var(--primary-light);
+    transition: transform 0.3s;
+  }
+
+  .developer-gallery img:hover {
+    transform: scale(1.05);
+  }
+  .our-team {
+    text-align: center;
+    padding: 2rem;
+    background-color: var(--bg-section);
+  }
+
+  .our-team h2 {
+    color: var(--primary-light);
+    font-size: 2.5rem;
+  }
+
+  .team-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 2rem;
+    justify-items: center;
+  }
+
+  .team-member {
+    text-align: center;
+  }
+
+  .team-photo {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid var(--primary-light);
+    transition: transform 0.3s, box-shadow 0.3s;
+  }
+
+  .team-photo:hover {
+    transform: scale(1.1);
+    box-shadow: 0 8px 20px rgba(37, 99, 235, 0.15);
+  }
+
+  .team-name {
+    font-weight: bold;
+    font-size: 1.1rem;
+    color: var(--primary);
+    margin-top: 0.5rem;
+  }
+
+  .team-role {
+    font-size: 0.9rem;
+    color: var(--primary-dark);
+  }
+</style>
+</head>
+<body>
+
+<!-- Hero Section -->
+<section class="hero">
+  <!-- Team Image Section -->
+  <div class="RG-team-photo">
+    <div class="photo-container">
+      <button class="photo-btn prev" aria-label="Previous Slide">&#10094;</button>
+      <div class="photo-track">
+        <!-- Slide 1 -->
+        <div class="photos-container">
+          <img src="image/team photo.jpg" alt="Team Photo 1" class="photo">
+          <div class="hover-text">
+            <h1>Guiding You Toward Financial Freedom</h1>
+            <p>We're here to support you every step of the way on your journey to a debt-free life—committed to helping you find peace of mind and lasting relief.</p>
+            <button class="hover-btn" onclick="window.location.href='https://forms.gle/your-form-link'">Fill The Form To Start</button>
+          </div>
+        </div>
+        <!-- Slide 2 -->
+        <div class="photos-container">
+          <img src="image/debt relief.jpg" alt="Debt Relief Image" class="photo">
+          <div class="hover-text">
+            <h1>You’re Not Alone on the Road to Recovery Freedom</h1>
+            <p>Facing debt can feel isolating, but with us by your side, you’re never alone on the path to financial freedom.</p>
+            <button class="hover-btn" onclick="window.location.href='https://forms.gle/your-form-link'">Fill The Form To Start</button>
+          </div>
+        </div>
+        <!-- Slide 3 -->
+        <div class="photos-container">
+          <img src="image/team photo.jpg" alt="Team Photo 3" class="photo">
+          <div class="hover-text">
+            <h1>Guiding You Toward Financial Freedom</h1>
+            <p>We’re devoted to supporting you on your journey to a debt-free life. From your very first step to your final milestone, our dedicated team stands by your side—working relentlessly to achieve the peace of mind and relief you deserve. We’ll be with you every step of the way.</p>
+            <button class="hover-btn" onclick="window.location.href='https://forms.gle/your-form-link'">Fill The Form To Start</button>
+          </div>
+        </div>
+      </div>
+      <button class="photo-btn next" aria-label="Next Slide">&#10095;</button>
+    </div>
+  </div>
+</section>
+  <!-- Our Origin Section -->
+  <section class="origin">
+    <h2>Our Origin</h2>
+    <p>
+      Our journey began with a simple mission: to empower individuals and families to break free from the burden of debt. Founded by a group of passionate financial experts, we saw firsthand the challenges people face when seeking financial relief. Inspired by real stories and driven by a desire to make a difference, we built a team dedicated to providing guidance, support, and hope. Today, our commitment remains stronger than ever—to help you achieve lasting financial freedom.
+    </p>
+  </section>
+  <section class="headline-section">
+    <h2>
+      From Debt to Hope — Transforming Lives Nationwide
+    </h2>
+    <p>
+      We are proud to have helped clients across the nation, guiding them from the depths of debt to a brighter, more hopeful future. Our commitment to transforming lives is unwavering, and we continue to strive for excellence in every step of our journey.
+    </p>
+    
+    <div class="signature-block">
+  <div class="signature-item">
+    <a href="https://in.linkedin.com/in/vishal-bora-8681468?trk=public_post_feed-actor-name" target="_blank">
+      <img src="image/Vishal bora.jpg" alt="Portrait of Vishal Bora" class="portrait">
+    </a>
+    <div class="signature-name">
+      <a href="https://in.linkedin.com/in/vishal-bora-8681468?trk=public_post_feed-actor-name" target="_blank" style="text-decoration: none; color: #7195f3;">Vishal Bora</a>
+    </div>
+    <div class="team-role">CEO & Founder</div>
+  </div>
+  <div class="signature-item">
+    <a href="https://in.linkedin.com/in/jyotsana-bora-637457163" target="_blank">
+      <img src="image/Jyotsana Bora.jpeg" alt="Portrait of Jyotsana Bora" class="portrait">
+    </a>
+    <div class="signature-name">
+      <a href="https://in.linkedin.com/in/jyotsana-bora-63745716" target="_blank" style="text-decoration: none; color: #7195f3;">Jyotsana Bora</a>
+    </div>
+    <div class="team-role">CHIEF HUMAN RESOURCES OFFICERS</div>
+  </div>
+</div>
+</section>
+<section class="principles-section">
+  <h2 class="principles-title">What you can count on</h2>
+  <p class="principles-description">
+    Here’s how we resolve your debt using the principles we stand behind:
+  </p>
+  <div class="principles-container">
+    <!-- Principle 1 -->
+    <div class="principle-item">
+      <img src="image/human approch.png" alt="A human approach icon" class="principle-icon">
+      <h3 class="principle-title">A human approach</h3>
+      <p class="principle-text">
+        No matter your situation, we’ll listen to you and treat you with respect, empathy, and understanding.
+      </p>
+    </div>
+    <!-- Principle 2 -->
+    <div class="principle-item">
+      <img src="image/moving forword.png" alt="Moving you forward icon" class="principle-icon">
+      <h3 class="principle-title">Moving you forward</h3>
+      <p class="principle-text">
+        When you meet a goal, we’re here to help with the next. Every day, we’ll work together to push your finances in a better direction.
+      </p>
+    </div>
+    <!-- Principle 3 -->
+    <div class="principle-item">
+      <img src="image/person.png" alt="Personalized solutions icon" class="principle-icon">
+      <h3 class="principle-title">Personalized solutions</h3>
+      <p class="principle-text">
+        We’ll work with you to customize a solution to resolve debt so that it fits your life today, and gets you where you want to be in the future.
+      </p>
+    </div>
+    <!-- Principle 4 -->
+    <div class="principle-item">
+      <img src="image/smrt.png" alt="Financially smarter icon" class="principle-icon">
+      <h3 class="principle-title">Financially smarter</h3>
+      <p class="principle-text">
+        We’ll teach you how to manage your money with confidence and transform how you think about your financial future.
+      </p>
+    </div>
+  </div>
+</section>
+  <!-- Transforming Lives Section -->
+  <section class="transforming-lives">
+    <h2>Transforming Lives, One Client at a Time</h2>
+    <p>
+      Since our inception in 2021, Reddington Global Consultancy has been dedicated to delivering exceptional value to clients through guaranteed cost reduction and enhanced quality assurance. Our commitment to integrity and excellence has enabled us to build trust among customers, candidates, and society at large.
+      <br><br>
+      Our passionate team specializes in Recruitment Solutions, Contact Center Solutions, Retail Requirements, and Management Consultancy. We take pride in connecting the right individuals with the right opportunities, ensuring a personalized and efficient recruitment experience.
+      <br><br>
+      With a focus on strategic initiatives that directly contribute value to both clients and their shareholders, we've become a valuable partner in our clients' talent acquisition endeavors.
+    </p>
+    <img src="image/certificate.jpg" alt="Quality Control Certification." style="width: 300px; height: auto; border-radius: 18px; margin-top: 1rem;">
+    <img src="image/certificate2.png" alt="Employee Recognition Programs" style="width: 300px; height: auto; border-radius: 18px; margin-top: 1rem;"><br>
+    <button class="cta-btn">Fill The Form To <br>Start Now</button>
+  </section>
+
+
+<!-- Testimonials Carousel Section -->
+<section class="testimonials-carousel">
+  <div class="carousel-container">
+    <button class="carousel-btn prev">&#10094;</button>
+
+    <div class="carousel-track">
+      <div class="testimonial-card">
+        <img src="image/c1.jpg" alt="Client 1" class="testimonial-img">
+        <div class="testimonial-meta">Client Name 1</div>
+        <div class="testimonial-quote">
+          “Our life started to get less complicated because the burden of debt is hard to carry.”
+        </div>
+      </div>
+      <div class="testimonial-card">
+        <img src="image/c2.jpg" alt="Client 2" class="testimonial-img">
+        <div class="testimonial-meta">Client Name 2</div>
+        <div class="testimonial-quote">
+          “I had my team. I had my support structure to push myself forward.”
+        </div>
+      </div>
+      <div class="testimonial-card">
+        <img src="image/c3.jpg" alt="Client 3" class="testimonial-img">
+        <div class="testimonial-meta">Client Name 3</div>
+        <div class="testimonial-quote">
+          “Being able to trust them to do their job allows you to take care of what’s important in your life.”
+        </div>
+      </div>
+    </div>
+
+    <button class="carousel-btn next">&#10095;</button>
+  </div>
+
+  <div class="carousel-dots">
+    <span class="dot active"></span>
+    <span class="dot"></span>
+    <span class="dot"></span>
+  </div>
+
+</section>
+
+<section class="our-team">
+  <h2>Our Team</h2>
+  <section class="our-team">
+  <h2>Leadership Team</h2>
+  <div class="team-container">
+    <div class="team-member">
+     <a href="https://in.linkedin.com/in/ayushi-srivastava-49711521b" target="_blank"> 
+      <img src="image/Ayushi Srivastava.jpg" alt="Ayushi Srivastava" class="team-photo">
+      <div class="team-name">Ayushi Srivastava</div>
+      </a>
+    </div>
+    <div class="team-member">
+      <img src="image/Ayushi Srivastava.jpg" alt="............" class="team-photo">
+      <div class="team-name">............</div>
+      
+    </div>
+    <div class="team-member">
+      <img src="image/Ayushi Srivastava.jpg" alt="............" class="team-photo">
+      <div class="team-name">............</div>
+      <div class="team-role">...........</div>
+    </div>
+    <div class="team-member">
+      <img src="image/Ayushi Srivastava.jpg" alt="............" class="team-photo">
+      <div class="team-name">............</div>
+      <div class="team-role">............</div>
+    </div>
+    <div class="team-member">
+      <img src="image/Ayushi Srivastava.jpg" alt="............" class="team-photo">
+      <div class="team-name">............</div>
+      <div class="team-role">............</div>
+    </div>
+    <div class="team-member">
+      <img src="image/Ayushi Srivastava.jpg" alt="............" class="team-photo">
+      <div class="team-name">............</div>
+      <div class="team-role">............</div>
+    </div>
+  </div>
+
+  
+  <div class="team-container">
+    <div class="team-member">
+     <a href="https://in.linkedin.com/in/mohd-anas-ansari-904002257" target="_blank"> 
+      <img src="image/Mohd Anas Ansari.jpg" alt="Mohd Anas Ansari" class="team-photo">
+      <div class="team-name">Mohd Anas Ansari</div>
+      </a>
+      <div class="team-role">............</div>
+    </div>
+    <div class="team-member">
+      <img src="image/Mohd Anas Ansari.jpg" alt="............" class="team-photo">
+      <div class="team-name">............</div>
+      <div class="team-role">............</div>
+    </div>
+    <div class="team-member">
+      <img src="image/Mohd Anas Ansari.jpg" alt="............" class="team-photo">
+      <div class="team-name">............</div>
+      <div class="team-role">............</div>
+    </div>
+    <div class="team-member">
+      <img src="image/Mohd Anas Ansari.jpg" alt="............" class="team-photo">
+      <div class="team-name">............</div>
+      <div class="team-role">............</div>
+    </div>
+    <div class="team-member">
+      <img src="image/Mohd Anas Ansari.jpg" alt="............" class="team-photo">
+      <div class="team-name">............</div>
+      <div class="team-role">............</div>
+    </div>
+    <div class="team-member">
+      <img src="image/Mohd Anas Ansari.jpg" alt="............" class="team-photo">
+      <div class="team-name">............</div>
+      <div class="team-role">............</div>
+    </div>
+  </div>
+</section>
+  </div>
+</section>
+<section class="cta-section">
+  <button class="cta-btn">Fill The Form To <br>Start Now</button>
+</section>
+<section class="developer-section">
+  <h2>Meet Our Developers</h2>
+  <div class="developer-gallery">
+    <div class="developer-card">
+      <img src="image/sd1.jpg" alt="Developer 1">
+      <div class="signature-name">Dheeraj Kumar</div>
+    </div>
+    <div class="developer-card">
+      <img src="image/sd2.jpg" alt="Developer 2">
+      <div class="signature-name">Prince Kushwaha</div>
+    </div>
+    <div class="developer-card">
+      <img src="image/sd3.jpg" alt="Developer 3">
+      <div class="signature-name">Prashant Pandey</div>
+    </div>
+    <div class="developer-card">
+      <img src="image/sd4.jpg" alt="Developer 4">
+      <div class="signature-name">Himanshu Kumar Tiwari</div>
+    </div>
+    <div class="developer-card">
+      <img src="image/sd5.jpg" alt="Developer 5">
+      <div class="signature-name">Aryan Arya</div>
+    </div>
+  </div></div>
+</section>
+
+  <!-- Footer Section -->
+  <footer style="text-align: center; padding: 2rem; background-color: #fcfcfc;">
+    <p>&copy; 2023 Reddington Global Debt relief. All rights reserved.</p>
+  </footer>
+<script>
+// Photo Section Logic
+const photoTrack = document.querySelector('.photo-track');
+const photoSlides = document.querySelectorAll('.photos-container');
+const photoPrevBtn = document.querySelector('.photo-btn.prev');
+const photoNextBtn = document.querySelector('.photo-btn.next');
+
+let photoIndex = 0;
+const totalPhotos = photoSlides.length;
+
+// Function to update the photo section
+function updatePhoto(index) {
+    photoTrack.style.transition = 'transform 0.5s ease-in-out';
+    photoTrack.style.transform = `translateX(-${index * 100}%)`;
+
+    // Add 'active' class to the current slide and remove it from others
+    photoSlides.forEach((slide, i) => {
+        if (i === index) {
+            slide.classList.add('active');
+        } else {
+            slide.classList.remove('active');
+        }
+    });
+}
+
+// Function to move to the next photo
+function nextPhoto() {
+    photoIndex = (photoIndex + 1) % totalPhotos;
+    updatePhoto(photoIndex);
+}
+
+// Function to move to the previous photo
+function prevPhoto() {
+    photoIndex = (photoIndex - 1 + totalPhotos) % totalPhotos;
+    updatePhoto(photoIndex);
+}
+
+// Event listeners for photo navigation buttons
+photoNextBtn.addEventListener('click', nextPhoto);
+photoPrevBtn.addEventListener('click', prevPhoto);
+
+// Initialize the photo section
+updatePhoto(photoIndex);
+
+// Testimonials Carousel Logic
+const testimonialsSection = document.querySelector('.testimonials-carousel');
+const track = testimonialsSection.querySelector('.carousel-track');
+const cards = testimonialsSection.querySelectorAll('.testimonial-card');
+const dots = testimonialsSection.querySelectorAll('.dot');
+const prevBtn = testimonialsSection.querySelector('.carousel-btn.prev');
+const nextBtn = testimonialsSection.querySelector('.carousel-btn.next');
+
+let currentIndex = 0;
+const totalCards = cards.length;
+let autoPlayInterval;
+
+// Function to update the carousel position and active dot
+function updateCarousel(index) {
+    track.style.transition = 'transform 0.5s ease-in-out';
+    track.style.transform = `translateX(-${index * 100}%)`;
+    dots.forEach(dot => dot.classList.remove('active'));
+    if (dots[index]) {
+        dots[index].classList.add('active');
+    }
+}
+
+// Function to move to the next slide
+function nextSlide() {
+    currentIndex = (currentIndex + 1) % totalCards;
+    updateCarousel(currentIndex);
+}
+
+// Function to move to the previous slide
+function prevSlide() {
+    currentIndex = (currentIndex - 1 + totalCards) % totalCards;
+    updateCarousel(currentIndex);
+}
+
+// Function to start autoplay
+function startAutoplay() {
+    clearInterval(autoPlayInterval); // Clear any existing interval
+    autoPlayInterval = setInterval(nextSlide, 5000); // 5 seconds
+}
+
+// Function to stop autoplay
+function stopAutoplay() {
+    clearInterval(autoPlayInterval);
+}
+
+// Event listeners for navigation buttons
+nextBtn.addEventListener('click', () => {
+    stopAutoplay();
+    nextSlide();
+    startAutoplay();
+});
+
+prevBtn.addEventListener('click', () => {
+    stopAutoplay();
+    prevSlide();
+    startAutoplay();
+});
+
+// Event listeners for dot navigation
+dots.forEach((dot, index) => {
+    dot.addEventListener('click', () => {
+        stopAutoplay();
+        currentIndex = index;
+        updateCarousel(currentIndex);
+        startAutoplay();
+    });
+});
+
+// Swipe support for touch devices
+let startX = 0;
+let isSwiping = false;
+
+track.addEventListener('touchstart', (e) => {
+    startX = e.touches[0].clientX;
+    isSwiping = true;
+    stopAutoplay();
+});
+
+track.addEventListener('touchmove', (e) => {
+    if (!isSwiping) return;
+    // Optional: Implement dragging effect here if needed
+});
+
+track.addEventListener('touchend', (e) => {
+    const endX = e.changedTouches[0].clientX;
+    const diffX = endX - startX;
+    if (Math.abs(diffX) > 50) {
+        if (diffX < 0) nextSlide();  // Swipe left
+        else prevSlide();            // Swipe right
+    }
+    isSwiping = false;
+    startAutoplay();
+});
+
+// Initialize the testimonials carousel
+updateCarousel(currentIndex);
+startAutoplay();
+photoSlides[0].classList.add('active'); // Mark the first slide as active
+</script>
+</body>
+</html>
